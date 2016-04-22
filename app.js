@@ -2,17 +2,34 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const port = 3000;
+const pg = require('pg');
 
-app.set('port', (process.env.PORT || port));
+const _port = 3000;
+
+app.set('port', (process.env.PORT || _port));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(express.static(path.join(__dirname, 'assets')));
 
 app.get('/', (req, res) => {
-  res.render('index', {
-    title: 'HKIY',
-    description: 'Hayaku Kaette Ika Yaritee'
+  // PostgreSQLに接続
+  const connectionString = process.env.DATABASE_URL || 'tcp://localhost:5432/mylocaldb';
+  pg.connect(connectionString, (error, client, done) => {
+    const _queryCmd = 'select * from tweet_count order by id desc offset 0 limit 1;';
+    const _query = client.query(_queryCmd);
+    const _rows = [];
+
+    _query.on('row', (row) => {
+      _rows.push(row);
+    });
+
+    _query.on('end', (row, err) => {
+      res.render('index', {
+        title: 'HKIY',
+        description: 'Hayaku Kaette Ika Yaritee',
+        id: _rows[0].id
+      });
+    });
   });
 });
 
