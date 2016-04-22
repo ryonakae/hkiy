@@ -3,14 +3,18 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const pg = require('pg');
+const bodyParser = require('body-parser');
 
 const _port = 3000;
 
 app.set('port', (process.env.PORT || _port));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-app.use(express.static(path.join(__dirname, 'assets')));
 
+app.use(express.static(path.join(__dirname, 'assets')));
+app.use(bodyParser.urlencoded({extended: true}));
+
+// get /
 app.get('/', (req, res) => {
   // PostgreSQLに接続
   const connectionString = process.env.DATABASE_URL || 'tcp://localhost:5432/mylocaldb';
@@ -33,7 +37,21 @@ app.get('/', (req, res) => {
   });
 });
 
-app.listen(app.get('port'), error => {
+// post /
+app.post('/post', (req, res) => {
+  if(req){
+    console.log(req.body);
+
+    // responseをjsonで返す
+    const response = {
+      status  : 200,
+      message : 'Post Success'
+    };
+    res.end(JSON.stringify(response));
+  }
+});
+
+app.listen(app.get('port'), (error) => {
   if (error) {
     console.error(error);
   } else {

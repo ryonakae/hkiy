@@ -3,7 +3,10 @@ html(lang='ja')
 head
   meta(charset='UTF-8')
   title!= title
+  script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js')
+  script(src='javascripts/index.js')
 body
-  h1!= title
-  p!= description
-  p!= id
+  h1 #{title}
+  p #{description}
+  p#js-count #{id}
+  .button#js-button button
