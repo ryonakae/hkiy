@@ -5,7 +5,7 @@
   },
   "engines": {
     "node": "4.x",
-    "npm": "2.x"
+    "npm": "2.1.x"
   },
   "dependencies": {
     "express": "^4.13.4",
