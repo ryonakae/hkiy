@@ -1,2 +1,3 @@
 # hkiy
-HKIY
+
+**Hayaku Kaette Ika Yaritee.**
