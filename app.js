@@ -12,7 +12,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(express.static(path.join(__dirname, 'assets')));
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // get /
 app.get('/', (req, res) => {
@@ -47,7 +48,7 @@ app.post('/post', (req, res) => {
       status  : 200,
       message : 'Post Success'
     };
-    res.end(JSON.stringify(response));
+    res.json(response);
   }
 });
 
