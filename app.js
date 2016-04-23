@@ -4,6 +4,9 @@ const app = express();
 const path = require('path');
 const pg = require('pg');
 const bodyParser = require('body-parser');
+const stylus = require('stylus');
+const koutoSwiss = require('kouto-swiss');
+const autoprefixer = require('autoprefixer-stylus');
 
 const _port = 3000;
 
@@ -12,6 +15,17 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(express.static(path.join(__dirname, 'assets')));
+app.use(stylus.middleware({
+  src: path.join(__dirname, 'assets'),
+  compile: (str, path) => {
+    return stylus(str)
+      .set('filename', path)
+      .set('compress', true)
+      .use(koutoSwiss())
+      .use(autoprefixer({ browsers: ['last 2 versions'] }))
+    ;
+  }
+}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 

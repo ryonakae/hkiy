@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 html(lang='ja')
-head
-  meta(charset='UTF-8')
-  title!= title
-  script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js')
-  script(src='javascripts/index.js')
-body
-  h1 #{title}
-  p #{description}
-  p
-    span#js-count #{id}
-    span#js-ordinal
-  .button#js-button button
+  head
+    meta(charset='UTF-8')
+    title!= title
+    link(rel='stylesheet', href='stylesheets/style.css')
+    script(src='javascripts/lib/jquery.min.js')
+    script(src='javascripts/index.js')
+  body
+    h1 #{title}
+    p #{description}
+    p
+      span#js-count #{id}
+      span#js-ordinal
+    .button#js-button button
