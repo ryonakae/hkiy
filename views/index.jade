@@ -4,12 +4,21 @@ html(lang='ja')
     meta(charset='UTF-8')
     title!= title
     link(rel='stylesheet', href='stylesheets/style.css')
-    script(src='javascripts/lib/jquery.min.js')
-    script(src='javascripts/index.js')
+    script(src='http://hkiy.tumblr.com/api/read/json?num=25&type=photo')
+    script(src='javascripts/index_bundle.js')
   body
-    h1 #{title}
-    p #{description}
-    p
-      span#js-count #{id}
-      span#js-ordinal
-    .button#js-button button
+    .background#js-background
+      
+    .content
+      .title
+        h1.title__text
+          a(href="/") #{title}
+        p.title__description #{description}
+        
+      .button#js-button 早く帰ってイカやりてぇ
+        
+      p.counter
+        | You are the
+        span.counter__strong#js-count #{id}
+        span.counter__ordinal#js-ordinal
+        | HKIY.

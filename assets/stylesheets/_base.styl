@@ -23,10 +23,13 @@ body
   word-wrap break-word
   overflow-wrap break-word
 
-  & ::-moz-selection,
+  & ::-moz-selection
+    background $bgColor_selection
+    color $textColor_default
+
   & ::selection
-      background $bgColor_selection
-      color $textColor_default
+    background $bgColor_selection
+    color $textColor_default
 
   +retina-query(only screen, 2)
     -webkit-font-smoothing antialiased

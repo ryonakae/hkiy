@@ -14,7 +14,6 @@ app.set('port', (process.env.PORT || _port));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(express.static(path.join(__dirname, 'assets')));
 app.use(stylus.middleware({
   src: path.join(__dirname, 'assets'),
   compile: (str, path) => {
@@ -28,6 +27,7 @@ app.use(stylus.middleware({
 }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'assets'))); // 設定の一番最後に書く
 
 // get /
 app.get('/', (req, res) => {

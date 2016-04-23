@@ -1,29 +1,40 @@
-(function(){
-  var $button;
-  var $count;
-  var $ordinal;
-  var _countNum;
+'use strict';
 
-  function init(){
+window.jQuery = window.$ = require('jquery');
+const velocity = require('velocity-animate');
+import {TumblrImager} from './lib/tumblr_background_imager.js';
+
+(() => {
+  let $button;
+  let $count;
+  let $ordinal;
+  let _countNum;
+
+  const init = () => {
     $button = document.querySelector('#js-button');
     $count = document.querySelector('#js-count');
     $ordinal = document.querySelector('#js-ordinal');
 
     checkOrdinal(parseInt($count.innerText));
 
-    jQuery($button).on('click.postData', function(){
+    jQuery($button).on('click.postData', () => {
       postData('/post', {'text': 'hoge'});
+    });
+
+    TumblrImager.init({
+      json: tumblr_api_read,
+      containerSelector: '#js-background'
     });
   };
 
-  function postData(_url, _data){
+  const postData = (_url, _data) => {
     console.log('post:', _url, _data);
 
     jQuery.ajax({
       type: 'POST',
       url: _url,
       data: _data,
-      success: function(res){
+      success: (res) => {
         if (res.status === 200) {
           console.log('success:', res);
 
@@ -35,16 +46,16 @@
     });
   };
 
-  function incrementCount(){
+  const incrementCount = () => {
     // $count内の文字列を整数に変換、1を足す
     _countNum = parseInt($count.innerText) + 1;
     // $count内の数字を1つ増やす
     $count.innerText = _countNum;
   };
 
-  function checkOrdinal(_num){
-    var _onePlace = _num % 10; // 一の位
-    var _tenPlace = Math.floor(_num % 100 / 10); // 十の位
+  const checkOrdinal = (_num) => {
+    const _onePlace = _num % 10; // 一の位
+    const _tenPlace = Math.floor(_num % 100 / 10); // 十の位
 
     // 数字によって序数を変える
     // 11とか111のときは11stじゃなくて11thになるから
