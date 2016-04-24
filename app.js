@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const stylus = require('stylus');
 const koutoSwiss = require('kouto-swiss');
 const autoprefixer = require('autoprefixer-stylus');
+const uaParser = require('ua-parser-js');
 
 const _port = 3000;
 
@@ -31,6 +32,12 @@ app.use(express.static(path.join(__dirname, 'assets'))); // 設定の一番最�
 
 // get /
 app.get('/', (req, res) => {
+  // ua見る
+  const parser = new uaParser();
+  const requestHeader = req.headers['user-agent'];
+  const ua = parser.setUA(requestHeader).getResult();
+  console.log(ua.device.type);
+
   // PostgreSQLに接続
   const connectionString = process.env.DATABASE_URL || 'tcp://localhost:5432/mylocaldb';
   pg.connect(connectionString, (error, client, done) => {
@@ -46,7 +53,8 @@ app.get('/', (req, res) => {
       res.render('index', {
         title: 'HKIY',
         description: 'Hayaku Kaette Ika Yaritee',
-        id: _rows[0].id
+        id: _rows[0].id,
+        ua: ua.device.type
       });
     });
   });

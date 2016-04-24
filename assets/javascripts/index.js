@@ -1,7 +1,6 @@
 'use strict';
 
 window.jQuery = window.$ = require('jquery');
-const velocity = require('velocity-animate');
 import {TumblrImager} from './lib/tumblr_background_imager.js';
 
 (() => {

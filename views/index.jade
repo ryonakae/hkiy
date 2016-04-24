@@ -4,7 +4,10 @@ html(lang='ja')
     meta(charset='UTF-8')
     title!= title
     link(rel='stylesheet', href='stylesheets/style.css')
-    script(src='http://hkiy.tumblr.com/api/read/json?num=25&type=photo')
+    - if (ua)
+      script(src='http://hkiy.tumblr.com/api/read/json?num=8&type=photo')
+    - else
+      script(src='http://hkiy.tumblr.com/api/read/json?num=20&type=photo')
     script(src='javascripts/index_bundle.js')
   body
     .background#js-background
