@@ -60,6 +60,7 @@ app.get('/', (req, res) => {
         id: _rows[0].id,
         ua: ua.device.type
       });
+      done();
     });
   });
 });
