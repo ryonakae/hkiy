@@ -21,6 +21,7 @@ var velocity = require('velocity-animate');
     checkOrdinal(parseInt($count.innerText));
 
     jQuery($button).on('click.postData', function () {
+      jQuery($button).off('.postData');
       postData('/post', { 'text': 'hoge' });
     });
 
@@ -37,13 +38,14 @@ var velocity = require('velocity-animate');
       type: 'POST',
       url: _url,
       data: _data,
+      async: false,
       success: function success(res) {
         if (res.status === 200) {
           console.log('success:', res);
 
           incrementCount();
-          jQuery($button).off('.postData');
           checkOrdinal(_countNum);
+          tweetPopup();
         }
       }
     });
@@ -78,6 +80,12 @@ var velocity = require('velocity-animate');
         else {
             $ordinal.innerText = 'th';
           }
+  };
+
+  var tweetPopup = function tweetPopup() {
+    var url = 'https://twitter.com/intent/tweet?text=早く帰ってイカやりてぇ%20%28You%20are%20the%20' + $count.innerText + $ordinal.innerText + '%20%23HKIY%29&url=http://hkiy.herokuapp.com/';
+    console.log(url);
+    window.open(url, 'tweetPopup', 'width=500, height=400, menubar=no, toolbar=no, location=no, status=no');
   };
 
   document.addEventListener('DOMContentLoaded', init, false);
