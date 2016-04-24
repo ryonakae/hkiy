@@ -42,8 +42,8 @@ window.jQuery = window.$ = require('jquery');
         if (res.status === 200) {
           console.log('success:', res);
 
-          incrementCount();
-          checkOrdinal(_countNum);
+          // incrementCount();
+          checkOrdinal(parseInt($count.innerText));
           tweetPopup();
         }
       }

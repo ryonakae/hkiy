@@ -56,6 +56,7 @@ app.get('/', (req, res) => {
       res.render('index', {
         title: 'HKIY',
         description: 'Hayaku Kaette Ika Yaritee',
+        url: 'http://hkiy.herokuapp.com',
         id: _rows[0].id,
         ua: ua.device.type
       });

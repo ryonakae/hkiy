@@ -39,8 +39,8 @@ import {TumblrImager} from './lib/tumblr_background_imager.js';
         if (res.status === 200) {
           console.log('success:', res);
 
-          incrementCount();
-          checkOrdinal(_countNum);
+          // incrementCount();
+          checkOrdinal(parseInt($count.innerText));
           tweetPopup();
         }
       },

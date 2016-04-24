@@ -1,21 +1,43 @@
 <!DOCTYPE html>
-html(lang='ja')
+html(lang='ja', prefix='og: http://ogp.me/ns# fb: http://www.facebook.com/2008/fbml')
   head
     meta(charset='UTF-8')
     title!= title
+    
+    meta(name='description', content='#{description}')
+    meta(name='robots', content='index,follow')
+    meta(name='viewport', content='width=device-width')
+    meta(property='og:title', content='#{title}')
+    meta(property='og:type', content='website')
+    meta(property='og:url', content='#{url}')
+    meta(property='og:description', content='#{description}')
+    meta(property='og:site_name', content='#{title}')
+    //- meta(property='og:image', content='#{url}/images/ogp.jpg')
+    meta(property='og:locale', content='ja_JP')
+    meta(name='twitter:card', content='summary')
+      
     link(rel='stylesheet', href='stylesheets/style.css')
+      
     - if (ua)
       script(src='http://hkiy.tumblr.com/api/read/json?num=8&type=photo')
     - else
       script(src='http://hkiy.tumblr.com/api/read/json?num=20&type=photo')
-    script(src='javascripts/index_bundle.js')
-  body
+    script(src='javascripts/hkiy.js')
+      
+  - if (ua === 'mobile')
+    - var bodyClass = 'is-mobile'
+  - else if (ua === 'tablet')
+    - var bodyClass = 'is-tablet'
+  - else
+    - var bodyClass = 'is-pc'
+  
+  body(class='#{bodyClass}')
     .background#js-background
       
     .content
       .title
         h1.title__text
-          a(href="/") #{title}
+          a(href='/') #{title}
         p.title__description #{description}
         
       .button#js-button 早く帰ってイカやりてぇ
@@ -25,3 +47,7 @@ html(lang='ja')
         span.counter__strong#js-count #{id}
         span.counter__ordinal#js-ordinal
         | HKIY.
+    
+    small.copyright
+      | by
+      a(href='https://twitter.com/ryo_dg', target='_blank') ryo_dg
