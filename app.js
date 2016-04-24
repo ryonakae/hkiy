@@ -8,8 +8,12 @@ const stylus = require('stylus');
 const koutoSwiss = require('kouto-swiss');
 const autoprefixer = require('autoprefixer-stylus');
 const uaParser = require('ua-parser-js');
+const moment = require('moment');
 
 const _port = 3000;
+const _connectionString = process.env.DATABASE_URL || 'tcp://localhost:5432/mylocaldb';
+let _queryCmd;
+let _query;
 
 app.set('port', (process.env.PORT || _port));
 app.set('views', path.join(__dirname, 'views'));
@@ -39,10 +43,9 @@ app.get('/', (req, res) => {
   console.log(ua.device.type);
 
   // PostgreSQLに接続
-  const connectionString = process.env.DATABASE_URL || 'tcp://localhost:5432/mylocaldb';
-  pg.connect(connectionString, (error, client, done) => {
-    const _queryCmd = 'select * from tweet_count order by id desc offset 0 limit 1;';
-    const _query = client.query(_queryCmd);
+  pg.connect(_connectionString, (error, client, done) => {
+    _queryCmd = 'select * from tweet_count order by id desc offset 0 limit 1;';
+    _query = client.query(_queryCmd);
     const _rows = [];
 
     _query.on('row', (row) => {
@@ -64,6 +67,16 @@ app.get('/', (req, res) => {
 app.post('/post', (req, res) => {
   if(req){
     console.log(req.body);
+
+    pg.connect(_connectionString, (error, client, done) => {
+      const date = moment().format('YYYY-MM-DD');
+      const time = moment().format('HH:mm:ss');
+      console.log(date, time);
+      _queryCmd = 'INSERT INTO tweet_count (date, time) values (' + "'" + date + "'" + ',' + "'" + time + "'" + ');';
+      _query = client.query(_queryCmd, (error, result) => {
+        done();
+      });
+    });
 
     // responseをjsonで返す
     const response = {
