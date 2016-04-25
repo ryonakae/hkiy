@@ -10,7 +10,6 @@ window.jQuery = window.$ = require('jquery');
   var $button = void 0;
   var $count = void 0;
   var $ordinal = void 0;
-  var _countNum = void 0;
 
   var init = function init() {
     $button = document.querySelector('#js-button');
@@ -21,6 +20,7 @@ window.jQuery = window.$ = require('jquery');
 
     jQuery($button).on('click.postData', function () {
       jQuery($button).off('.postData');
+      $button.classList.add('is-disable');
       postData('/post', { 'text': 'hoge' });
     });
 
@@ -48,13 +48,6 @@ window.jQuery = window.$ = require('jquery');
         }
       }
     });
-  };
-
-  var incrementCount = function incrementCount() {
-    // $count内の文字列を整数に変換、1を足す
-    _countNum = parseInt($count.innerText) + 1;
-    // $count内の数字を1つ増やす
-    $count.innerText = _countNum;
   };
 
   var checkOrdinal = function checkOrdinal(_num) {

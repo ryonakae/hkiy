@@ -17,6 +17,7 @@ import {TumblrImager} from './lib/tumblr_background_imager.js';
 
     jQuery($button).on('click.postData', () => {
       jQuery($button).off('.postData');
+      $button.classList.add('is-disable');
       postData('/post', {'text': 'hoge'});
     });
 
