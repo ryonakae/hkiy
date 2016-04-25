@@ -70,11 +70,13 @@ app.post('/post', (req, res) => {
   if(req){
     console.log(req.body);
 
+    // PostgreSQLに接続
     pg.connect(_connectionString, (error, client, done) => {
       const date = moment().format('YYYY-MM-DD');
       const time = moment().format('HH:mm:ss');
       console.log(date, time);
-      _queryCmd = 'INSERT INTO tweet_count (date, time) values (' + "'" + date + "'" + ',' + "'" + time + "'" + ');';
+      // 新しいデータ入れて、一番古いデータを消す
+      _queryCmd = 'INSERT INTO tweet_count (date, time) values (' + "'" + date + "'" + ',' + "'" + time + "'" + ');' + 'delete from tweet_count where id = (select min(id) from tweet_count);';
       _query = client.query(_queryCmd, (error, result) => {
         done();
       });
