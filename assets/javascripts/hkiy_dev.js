@@ -9,16 +9,16 @@ import {TumblrImager} from './lib/tumblr_background_imager.js';
   let $ordinal;
 
   const init = () => {
-    $button = document.querySelector('#js-button');
-    $count = document.querySelector('#js-count');
-    $ordinal = document.querySelector('#js-ordinal');
+    $button = document.getElementById('js-button');
+    $count = document.getElementById('js-count');
+    $ordinal = document.getElementById('js-ordinal');
 
     checkOrdinal(parseInt($count.innerText));
 
     jQuery($button).on('click.postData', () => {
       jQuery($button).off('.postData');
       $button.classList.add('is-disable');
-      postData('/post', {'text': 'hoge'});
+      postData('/post', {});
     });
 
     TumblrImager.init({
@@ -28,7 +28,7 @@ import {TumblrImager} from './lib/tumblr_background_imager.js';
   };
 
   const postData = (_url, _data) => {
-    console.log('post:', _url, _data);
+    // console.log('post:', _url, _data);
 
     jQuery.ajax({
       type: 'POST',
@@ -37,7 +37,7 @@ import {TumblrImager} from './lib/tumblr_background_imager.js';
       async: false,
       success: (res) => {
         if (res.status === 200) {
-          console.log('success:', res);
+          // console.log('success:', res);
 
           // incrementCount();
           checkOrdinal(parseInt($count.innerText));
@@ -73,7 +73,7 @@ import {TumblrImager} from './lib/tumblr_background_imager.js';
 
   const tweetPopup = () => {
     const url = 'https://twitter.com/intent/tweet?text=早く帰ってイカやりてぇ%20%28You%20are%20the%20' + $count.innerText + $ordinal.innerText + '%20%23HKIY%29&url=http://hkiy.herokuapp.com/';
-    console.log(url);
+    // console.log(url);
     window.open(url, 'tweetPopup', 'width=500, height=400, menubar=no, toolbar=no, location=no, status=no');
   };
 

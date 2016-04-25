@@ -33,7 +33,7 @@ export const TumblrImager = {
 
   preloadImages: function() {
     $.each(this.urls, function() {
-      console.log(this);
+      // console.log(this);
       $('<img>').attr('src', this);
     });
   },

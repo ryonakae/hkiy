@@ -40,7 +40,7 @@ app.get('/', (req, res) => {
   const parser = new uaParser();
   const requestHeader = req.headers['user-agent'];
   const ua = parser.setUA(requestHeader).getResult();
-  console.log(ua.device.type);
+  // console.log(ua.device.type);
 
   // PostgreSQLに接続
   pg.connect(_connectionString, (error, client, done) => {
@@ -68,13 +68,13 @@ app.get('/', (req, res) => {
 // post /
 app.post('/post', (req, res) => {
   if(req){
-    console.log(req.body);
+    // console.log(req.body);
 
     // PostgreSQLに接続
     pg.connect(_connectionString, (error, client, done) => {
       const date = moment().format('YYYY-MM-DD');
       const time = moment().format('HH:mm:ss');
-      console.log(date, time);
+      // console.log(date, time);
       // 新しいデータ入れて、一番古いデータを消す
       _queryCmd = 'INSERT INTO tweet_count (date, time) values (' + "'" + date + "'" + ',' + "'" + time + "'" + ');' + 'delete from tweet_count where id = (select min(id) from tweet_count);';
       _query = client.query(_queryCmd, (error, result) => {
@@ -93,8 +93,8 @@ app.post('/post', (req, res) => {
 
 app.listen(app.get('port'), (error) => {
   if (error) {
-    console.error(error);
+    // console.error(error);
   } else {
-    console.info('listen:', app.get('port'));
+    // console.info('listen:', app.get('port'));
   }
 });
