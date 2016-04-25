@@ -7,7 +7,6 @@ import {TumblrImager} from './lib/tumblr_background_imager.js';
   let $button;
   let $count;
   let $ordinal;
-  let _countNum;
 
   const init = () => {
     $button = document.querySelector('#js-button');
@@ -45,13 +44,6 @@ import {TumblrImager} from './lib/tumblr_background_imager.js';
         }
       },
     });
-  };
-
-  const incrementCount = () => {
-    // $count内の文字列を整数に変換、1を足す
-    _countNum = parseInt($count.innerText) + 1;
-    // $count内の数字を1つ増やす
-    $count.innerText = _countNum;
   };
 
   const checkOrdinal = (_num) => {
