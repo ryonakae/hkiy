@@ -1,14 +1,15 @@
 'use strict';
-const express = require('express');
+
+import express from 'express';
 const app = express();
-const path = require('path');
-const pg = require('pg');
-const bodyParser = require('body-parser');
-const stylus = require('stylus');
-const koutoSwiss = require('kouto-swiss');
-const autoprefixer = require('autoprefixer-stylus');
-const uaParser = require('ua-parser-js');
-const moment = require('moment');
+import path from 'path';
+import pg from 'pg';
+import bodyParser from 'body-parser';
+import stylus from 'stylus';
+import koutoSwiss from 'kouto-swiss';
+import autoprefixer from 'autoprefixer-stylus';
+import uaParser from 'ua-parser-js';
+import moment from 'moment';
 
 const _port = 3000;
 const _connectionString = process.env.DATABASE_URL || 'tcp://localhost:5432/mylocaldb';
@@ -93,8 +94,8 @@ app.post('/post', (req, res) => {
 
 app.listen(app.get('port'), (error) => {
   if (error) {
-    // console.error(error);
+    console.error(error);
   } else {
-    // console.info('listen:', app.get('port'));
+    console.info('listen:', app.get('port'));
   }
 });
