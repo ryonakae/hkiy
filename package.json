@@ -2,7 +2,7 @@
   "name": "hkiy",
   "scripts": {
     "build": "browserify -t babelify assets/javascripts/hkiy_dev.js -o assets/javascripts/hkiy.js",
-    "watch": "npm run build && watchify -t babelify assets/javascripts/hkiy_dev.js -o assets/javascripts/hkiy.js -v",
+    "watch": "npm run build && watchify -d -t babelify assets/javascripts/hkiy_dev.js -o assets/javascripts/hkiy.js -v",
     "build:prod": "npm run build && uglifyjs assets/javascripts/hkiy.js --stats -o assets/javascripts/hkiy.js",
     "start": "babel-node app.js"
   },
