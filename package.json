@@ -3,9 +3,9 @@
   "scripts": {
     "browserify": "browserify -t babelify assets/javascripts/hkiy_dev.js -o assets/javascripts/hkiy.js",
     "watchify": "watchify -d -t babelify assets/javascripts/hkiy_dev.js -o assets/javascripts/hkiy.js -v",
-    "watch": "npm run browserify && npm run watchify",
-    "start": "babel-node app.js & npm run watch",
     "uglifyjs": "uglifyjs assets/javascripts/hkiy.js --stats -o assets/javascripts/hkiy.js",
+    "start": "babel-node app.js",
+    "watch": "npm run browserify && npm run watchify",
     "build": "npm run browserify && npm run uglifyjs"
   },
   "engines": {
