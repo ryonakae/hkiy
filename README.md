@@ -41,20 +41,15 @@ $ heroku pg:pull DATABASE_URL mylocaldb --app hkiy
 ```
 
 ## 開発する
-サーバー起動
+サーバー起動 + JSのBrowserify&Watchify
 ```
 $ npm start
-```
-
-別ウインドウ立ち上げて、JSのWatchify
-```
-$ npm run watch
 ```
 
 ## 本番用のJSのビルド
 BrowserifyとUglifyする
 ```
-$ npm run build:prod
+$ npm run build
 ```
 
 ## 本番にデプロイ

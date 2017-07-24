@@ -60,18 +60,18 @@ body
 
 .button
   font-weight bold
-  width auto
+  width 330px
   display inline-block
   margin-top 70px
   background-color $bgColor_button
   color $textColor_default
   border-radius 8px
-  padding 18px 80px
+  padding 18px 0
   cursor pointer
   transition: all 300ms easing('out-expo')
   box-shadow 0 2px 0 0 darken($bgColor_button, 30%)
 
-  &:hover
+  body.is-pc &:hover
     background-color lighten($bgColor_button, 10%)
 
   &:active
@@ -84,9 +84,13 @@ body
     box-shadow 0 0 0 0 $bgColor_buttonDisable
     transform translateY(2px)
 
+    body.is-pc &:hover
+      background-color $bgColor_buttonDisable
+
   +media-query($mq_sp)
+    width 280px
     margin-top 45px
-    padding 15px 40px
+    padding 15px 0
 
 .counter
   padding 0

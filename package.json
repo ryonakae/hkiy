@@ -1,10 +1,12 @@
 {
   "name": "hkiy",
   "scripts": {
-    "build": "browserify -t babelify assets/javascripts/hkiy_dev.js -o assets/javascripts/hkiy.js",
-    "watch": "npm run build && watchify -d -t babelify assets/javascripts/hkiy_dev.js -o assets/javascripts/hkiy.js -v",
-    "build:prod": "npm run build && uglifyjs assets/javascripts/hkiy.js --stats -o assets/javascripts/hkiy.js",
-    "start": "babel-node app.js"
+    "browserify": "browserify -t babelify assets/javascripts/hkiy_dev.js -o assets/javascripts/hkiy.js",
+    "watchify": "watchify -d -t babelify assets/javascripts/hkiy_dev.js -o assets/javascripts/hkiy.js -v",
+    "watch": "npm run browserify && npm run watchify",
+    "start": "babel-node app.js & npm run watch",
+    "uglifyjs": "uglifyjs assets/javascripts/hkiy.js --stats -o assets/javascripts/hkiy.js",
+    "build": "npm run browserify && npm run uglifyjs"
   },
   "engines": {
     "node": "4.x",
@@ -19,6 +21,7 @@
     "express": "^4.13.4",
     "jade": "^1.11.0",
     "jquery": "^2.2.3",
+    "js-cookie": "^2.1.4",
     "kouto-swiss": "^0.12.0",
     "moment": "^2.13.0",
     "path": "^0.12.7",
