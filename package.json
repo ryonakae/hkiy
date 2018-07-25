@@ -1,16 +1,18 @@
 {
   "name": "hkiy",
+  "main": "app.js",
+  "license": "MIT",
   "scripts": {
     "browserify": "browserify -t babelify assets/javascripts/hkiy_dev.js -o assets/javascripts/hkiy.js",
     "watchify": "watchify -d -t babelify assets/javascripts/hkiy_dev.js -o assets/javascripts/hkiy.js -v",
     "uglifyjs": "uglifyjs assets/javascripts/hkiy.js --stats -o assets/javascripts/hkiy.js",
     "start": "babel-node app.js",
-    "watch": "npm run browserify && npm run watchify",
-    "build": "npm run browserify && npm run uglifyjs"
+    "watch": "yarn browserify && yarn watchify",
+    "build": "yarn browserify && yarn uglifyjs"
   },
   "engines": {
-    "node": "4.x",
-    "npm": "2.1.x"
+    "node": "8.11.3",
+    "yarn": "1.7.x"
   },
   "dependencies": {
     "autoprefixer-stylus": "^0.9.2",
