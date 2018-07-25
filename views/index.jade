@@ -1,5 +1,15 @@
 doctype html
 html(lang='ja', prefix='og: http://ogp.me/ns#')
+  - if (ua === 'mobile')
+    - var bodyClass = 'is-mobile'
+    - var photoCount = 8
+  - else if (ua === 'tablet')
+    - var bodyClass = 'is-tablet'
+    - var photoCount = 12
+  - else
+    - var bodyClass = 'is-pc'
+    - var photoCount = 20
+
   head
     meta(charset='UTF-8')
     title!= title
@@ -18,18 +28,8 @@ html(lang='ja', prefix='og: http://ogp.me/ns#')
 
     link(rel='stylesheet', href='stylesheets/style.css')
 
-    - if (ua)
-      script(src='http://hkiy.tumblr.com/api/read/json?num=8&type=photo')
-    - else
-      script(src='http://hkiy.tumblr.com/api/read/json?num=20&type=photo')
+    script(src='https://hkiy.tumblr.com/api/read/json?num=#{photoCount}&type=photo')
     script(src='javascripts/hkiy.js')
-
-  - if (ua === 'mobile')
-    - var bodyClass = 'is-mobile'
-  - else if (ua === 'tablet')
-    - var bodyClass = 'is-tablet'
-  - else
-    - var bodyClass = 'is-pc'
 
   body(class='#{bodyClass}')
     .background#js-background
