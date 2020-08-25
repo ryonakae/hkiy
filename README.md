@@ -6,7 +6,7 @@
 nodeのパッケージをインストール
 
 ```
-$ npm install
+$ yarn install
 ```
 
 PostgreSQLの準備
@@ -43,18 +43,18 @@ $ heroku pg:pull DATABASE_URL mylocaldb --app hkiy
 ## 開発する
 アプリ起動
 ```
-$ npm start
+$ yarn start
 ```
 
 別ウインドウ立ち上げて、JSのWatchify
 ```
-$ npm run watch
+$ yarn watch
 ```
 
 ## 本番用のJSのビルド
 BrowserifyとUglifyする
 ```
-$ npm run build
+$ yarn build
 ```
 
 ## 本番にデプロイ

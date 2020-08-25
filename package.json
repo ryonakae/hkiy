@@ -12,7 +12,7 @@
   },
   "engines": {
     "node": "8.11.3",
-    "yarn": "1.7.x"
+    "yarn": "1.x"
   },
   "dependencies": {
     "autoprefixer-stylus": "^0.9.2",
